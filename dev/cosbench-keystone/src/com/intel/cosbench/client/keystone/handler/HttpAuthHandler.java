@@ -19,7 +19,6 @@ package com.intel.cosbench.client.keystone.handler;
 
 import java.io.*;
 import java.net.SocketTimeoutException;
-
 import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -32,7 +31,7 @@ import com.intel.cosbench.client.keystone.*;
 
 public class HttpAuthHandler implements AuthHandler {
 
-    private static final String PATH = "/tokens";
+    private static final String PATH = "/auth/tokens";
 
     private HttpClient client;
     private String url;
@@ -64,7 +63,8 @@ public class HttpAuthHandler implements AuthHandler {
             String e = "error receiving response from the keystone";
             throw new KeystoneServerException(e, ex);
         }
-        return parseResponse(response.getStatusLine(), response.getEntity());
+        String token = response.getFirstHeader("X-Subject-Token").getValue();
+        return parseResponse(response.getStatusLine(), response.getEntity(), token);
     }
 
     private void prepareRequest(HttpPost method, KeystoneRequest request) {
@@ -80,7 +80,7 @@ public class HttpAuthHandler implements AuthHandler {
         method.addHeader("Content-Type", "application/json"); // hard coded
     }
 
-    private KeystoneResponse parseResponse(StatusLine status, HttpEntity entity) {
+    private KeystoneResponse parseResponse(StatusLine status, HttpEntity entity, String token) {
         String json = null;
         int code = status.getStatusCode();
         try {
@@ -96,7 +96,7 @@ public class HttpAuthHandler implements AuthHandler {
         } finally {
             clearResponse(entity);
         }
-        return mapper.fromJson(json, KeystoneResponse.class);
+        return mapper.fromJson(json, KeystoneResponse.class, token);
     }
 
     private void clearResponse(HttpEntity entity) {

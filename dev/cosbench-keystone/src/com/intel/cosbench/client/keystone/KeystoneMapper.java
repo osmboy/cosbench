@@ -20,6 +20,7 @@ package com.intel.cosbench.client.keystone;
 import org.codehaus.jackson.map.*;
 import org.codehaus.jackson.map.DeserializationConfig.Feature;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.intel.cosbench.client.keystone.KeystoneResponse;
 
 public class KeystoneMapper {
 
@@ -55,14 +56,15 @@ public class KeystoneMapper {
         return json;
     }
 
-    public <T> T fromJson(String json, Class<T> clazz) {
-        T value = null;
+    public KeystoneResponse fromJson(String json, Class<KeystoneResponse> clazz, String token) {
+    	KeystoneResponse value;
         try {
             value = mapper.readValue(json, clazz);
         } catch (Exception ex) {
             String e = "fail to generate any obj from the given json string";
             throw new KeystoneClientException(e, ex); // should never happen
         }
+        value.getToken().setId(token);
         return value;
     }
 
