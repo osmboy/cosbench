@@ -32,7 +32,7 @@ import com.intel.cosbench.log.Logger;
  * This class encapsulates an Openstack Keystone implementation for the
  * Auth-API.
  * 
- * @author ywang19, qzheng7
+ * @author ywang19, qzheng7, osmboy
  * 
  */
 class KeystoneAuth extends NoneAuth {

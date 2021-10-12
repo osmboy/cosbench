@@ -13,6 +13,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. 
+@author osmboy (lei.lei@ostorage.com.cn)
 */ 
 
 package com.intel.cosbench.client.keystone;
@@ -24,7 +25,7 @@ import com.intel.cosbench.client.keystone.KeystoneRequest.AuthInfo.*;;
 
 public class KeystoneRequest {
 
-	private AuthInfo auth;
+    private AuthInfo auth;
 
     public KeystoneRequest() {
         AuthInfo auth = new AuthInfo();
@@ -40,7 +41,7 @@ public class KeystoneRequest {
     }
     
     public void addProjectScope(String tenantName, String id) {
-		// TODO Auto-generated method stub
+	// TODO Auto-generated method stub
     	Scope scope = new Scope();
     	Project project = new Project();
     	Domain domain = new Domain();
@@ -49,28 +50,24 @@ public class KeystoneRequest {
     	project.setName(tenantName);
     	scope.setProject(project);
     	auth.setScope(scope);
-    	
-    	
-    	
-		
-	}
+    }
 
-	public void addUserScope(String username, String password, String id) {
-		// TODO Auto-generated method stub
-		Identity identity = new Identity();
+    public void addUserScope(String username, String password, String id) {
+	// TODO Auto-generated method stub
+	Identity identity = new Identity();
     	Password pwd = new Password();
-		User user = new User();
-		Domain domain = new Domain();
-		domain.setId(id);
-		user.setDomain(domain);
-		user.setName(username);
-		user.setPassword(password);
-		pwd.setUser(user);
-		identity.setPassword(pwd);
-		identity.setMethods(Collections.singletonList("password"));
-		auth.setIdentity(identity);
+	User user = new User();
+	Domain domain = new Domain();
+	domain.setId(id);
+	user.setDomain(domain);
+	user.setName(username);
+	user.setPassword(password);
+	pwd.setUser(user);
+	identity.setPassword(pwd);
+	identity.setMethods(Collections.singletonList("password"));
+	auth.setIdentity(identity);
 		
-	}
+    }
 
     // --------------------------------------------------------------------------
     // AuthInfo
@@ -110,99 +107,99 @@ public class KeystoneRequest {
         private Identity identity;
         private Scope scope;
         
-		public Identity getIdentity() {
-			return identity;
-		}
+	public Identity getIdentity() {
+	    return identity;
+	}
 
-		public void setIdentity(Identity identity) {
-			this.identity = identity;
-		}
+	public void setIdentity(Identity identity) {
+	    this.identity = identity;
+	}
 
-		public Scope getScope() {
-			return scope;
-		}
+	public Scope getScope() {
+	    return scope;
+	}
 
-		public void setScope(Scope scope) {
-			this.scope = scope;
-		}
+	public void setScope(Scope scope) {
+		this.scope = scope;
+	}
 		
-		public static class Identity {
-			private List<String> methods;
-	    	private Password password;
+	public static class Identity {
+	    private List<String> methods;
+	    private Password password;
 			
-			public Password getPassword() {
-				return password;
-			}
+	    public Password getPassword() {
+	        return password;
+	    }
 			
-			public void setPassword(Password password) {
-				this.password = password;
-			}
+	    public void setPassword(Password password) {
+		this.password = password;
+	    }
 
-			public List<String> getMethods() {
-				return methods;
-			}
+	    public List<String> getMethods() {
+		return methods;
+	    }
 
-			public void setMethods(List<String> methods) {
-				this.methods = methods;
-			}
+	    public void setMethods(List<String> methods) {
+		this.methods = methods;
+	    }
 
-		}
+	}
 		
         public static class Scope {
-        	private Project project;
+            private Project project;
 
-			public Project getProject() {
-				return project;
-			}
+	    public Project getProject() {
+		return project;
+	    }
 
-			public void setProject(Project project) {
-				this.project = project;
-			}
+	    public void setProject(Project project) {
+		this.project = project;
+	    }
         }
         
         public static class Project {
-        	private String name;
-        	private Domain domain;
+            private String name;
+            private Domain domain;
         	
-			public String getName() {
-				return name;
-			}
+	    public String getName() {
+		return name;
+	    }
 			
-			public void setName(String name) {
-				this.name = name;
-			}
+	    public void setName(String name) {
+		this.name = name;
+	    }
 			
-			public Domain getDomain() {
-				return domain;
-			}
+	    public Domain getDomain() {
+		return domain;
+	    }
 			
-			public void setDomain(Domain domain) {
-				this.domain = domain;
-			}
+	    public void setDomain(Domain domain) {
+		this.domain = domain;
+	    }
         }
         
         public static class Password {
-        	private User user;
+            private User user;
 
-			public User getUser() {
-				return user;
-			}
+	    public User getUser() {
+		return user;
+	    }
 
-			public void setUser(User user) {
-				this.user = user;
-			}
+	    public void setUser(User user) {
+		this.user = user;
+	    }
         	
         }
         public static class Domain {
-        	private String id;
+            private String id;
 
-			public String getId() {
-				return id;
-			}
+            public String getId() {
+		return id;
+	    }
 
-			public void setId(String id) {
-				this.id = id;
-			}
+	    public void setId(String id) {
+		this.id = id;
+	    }
         }
         public static class User {
 
@@ -223,14 +220,14 @@ public class KeystoneRequest {
             }    
             
             public Domain getDomain() {
-				return domain;
-			}
+		return domain;
+	    }
 
-			public void setDomain(Domain domain) {
-				this.domain = domain;
-			}
+	    public void setDomain(Domain domain) {
+		this.domain = domain;
+	    }
 
-			public void setPassword(String password) {
+	    public void setPassword(String password) {
                 this.password = password;
             }
 

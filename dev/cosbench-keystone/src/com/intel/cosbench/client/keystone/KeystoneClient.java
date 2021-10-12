@@ -53,7 +53,7 @@ import com.intel.cosbench.client.keystone.handler.*;
  * </p>
  * </ol>
  * 
- * @author qzheng (qing.zheng@intel.com)
+ * @author qzheng (qing.zheng@intel.com), osmboy (lei.lei@ostorage.com.cn)
  */
 public class KeystoneClient {
 
@@ -164,7 +164,7 @@ public class KeystoneClient {
         this.password = password;
     }
 
-    public String getDomaint() {
+    public String getDomain() {
         return domain;
     }
 
